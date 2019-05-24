@@ -10,7 +10,7 @@ window.setup = () => {
 }
 
 window.draw = () => {
-	const CRYSTAL_SIZE_MAX = 150
+	const CRYSTAL_SIZE_MAX = 500
 	const GAP_MIN = 10
 
 	const crystalSize = min(CRYSTAL_SIZE_MAX, min(windowWidth, windowHeight) - 2 * GAP_MIN)
@@ -26,10 +26,17 @@ window.draw = () => {
 		const y = gapVer + crystalSize / 2 + int(i / cols) * (crystalSize + gapVer)
 		
 		new Crystal(x, y, crystalSize).render()
+		const canvas = document.getElementsByTagName('canvas')
+		image = canvas[0].toDataURL('image/png').replace('image/png', 'image/octet-stream')
+		window.location.href = image
 	}
 
 	favicon(displayDensity(), crystalSize, gapHor, gapVer)
 }
+
+setTimeout(function() {
+	location.reload();
+}, 3000)
 
 window.windowResized = () => {
 	resizeCanvas(windowWidth, windowHeight)

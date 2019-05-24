@@ -14,10 +14,12 @@ export default class Outline extends Layer {
 
     push()
 
-    if (random([true, false])) {
+    const state = random(["hexagon", "ellipse", "octagon"])
+    if (state == "hexagon") {
       polygon(6, 0, 0, this.radius)
-    }
-    else {
+    } else if (state == "octagon") {
+      polygon(8, 0, 0, this.radius)
+    } else {
       ellipse(0, 0, this.size, this.size)
     }
 

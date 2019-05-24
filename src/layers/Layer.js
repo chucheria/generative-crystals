@@ -13,8 +13,16 @@ export default class Layer {
 
     this.palette = [
       color(255, 198, 71),
-      color(0, 40, 94)
+      color(0, 40, 94),
+      color(83, 139, 255)
     ]
+
+    // this.palette = [
+    //   color(255, 128, 102),
+    //   color(0, 201, 167),
+    //   color(132, 94, 194)
+    // ]
+
     this.color = random(this.palette)
     this.strokeWeight = random([1, 2])
   }
