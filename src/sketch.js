@@ -26,17 +26,17 @@ window.draw = () => {
 		const y = gapVer + crystalSize / 2 + int(i / cols) * (crystalSize + gapVer)
 		
 		new Crystal(x, y, crystalSize).render()
-		const canvas = document.getElementsByTagName('canvas')
-		image = canvas[0].toDataURL('image/png').replace('image/png', 'image/octet-stream')
-		window.location.href = image
+		// const canvas = document.getElementsByTagName('canvas')
+		// image = canvas[0].toDataURL('image/png').replace('image/png', 'image/octet-stream')
+		// window.location.href = image
 	}
 
-	favicon(displayDensity(), crystalSize, gapHor, gapVer)
+	// favicon(displayDensity(), crystalSize, gapHor, gapVer)
 }
 
-setTimeout(function() {
-	location.reload();
-}, 3000)
+// setTimeout(function() {
+// 	location.reload();
+// }, 3000)
 
 window.windowResized = () => {
 	resizeCanvas(windowWidth, windowHeight)
