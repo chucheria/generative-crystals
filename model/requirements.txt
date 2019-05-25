@@ -2,3 +2,5 @@ numpy
 tensorflow<2.0.0
 pillow
 scipy==1.1.0
+opencv-python
+boto3
