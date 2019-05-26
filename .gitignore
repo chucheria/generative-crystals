@@ -241,7 +241,6 @@ dmypy.json
 #### Data ####
 
 data/*
-!data/.gitkeep
-
+raw/*
 
 # End of https://www.gitignore.io/api/node,macos,python
