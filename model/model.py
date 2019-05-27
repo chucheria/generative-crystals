@@ -289,8 +289,8 @@ def train_dcgan(batch_size, epochs, image_shape, dataset_path):
 
 
 def main():
-    aws_secret = 'i+tdlojssrxdZV1vUXIs9YXVYIZpCv3pk7Vt8mPr'
-    aws_access = 'AKIAIHOCCBZFO5AHUNWQ'
+    aws_secret = ''
+    aws_access = ''
     bucket = 'crystals-gdg'
     zip_data = 'raw.zip'
     
