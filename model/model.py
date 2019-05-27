@@ -1,5 +1,7 @@
 import time
 import os
+import boto3
+from zipfile import ZipFile
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 import numpy as np
@@ -19,7 +21,17 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 # images from 200 different birds. We will feed the images without applying
 # the provided bounding boxes from the dataset. The data will only be resized
 # and normalized. Keras ImageDataGenerator will be used for loading the dataset
-def load_dataset(dataset_path, batch_size, image_shape):
+def load_dataset(aws_access, aws_secret, dataset_path, batch_size, image_shape):
+    
+    s3 = boto3.client('s3', 
+                  aws_access_key_id = aws_access, 
+                  aws_secret_access_key = aws_secret)
+    s3.download_file(bucket, zip_data, zip_data)
+    zip_ref = ZipFile(zip_data, 'r')
+    zip_ref.extractall()
+    zip_ref.close()
+    os.remove(zip_data)
+    
     dataset_generator = ImageDataGenerator()
     dataset_generator = dataset_generator.flow_from_directory(
         dataset_path, target_size=(image_shape[0], image_shape[1]),
@@ -277,6 +289,11 @@ def train_dcgan(batch_size, epochs, image_shape, dataset_path):
 
 
 def main():
+    aws_secret = 'i+tdlojssrxdZV1vUXIs9YXVYIZpCv3pk7Vt8mPr'
+    aws_access = 'AKIAIHOCCBZFO5AHUNWQ'
+    bucket = 'crystals-gdg'
+    zip_data = 'raw.zip'
+    
     dataset_path = '/home/jupyter/tutorials/generative-crystals/raw'
     batch_size = 64
     image_shape = (64, 64, 3)
