@@ -23,14 +23,14 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 # and normalized. Keras ImageDataGenerator will be used for loading the dataset
 def load_dataset(aws_access, aws_secret, dataset_path, batch_size, image_shape):
     
-    s3 = boto3.client('s3', 
-                  aws_access_key_id = aws_access, 
-                  aws_secret_access_key = aws_secret)
-    s3.download_file(bucket, zip_data, zip_data)
-    zip_ref = ZipFile(zip_data, 'r')
-    zip_ref.extractall()
-    zip_ref.close()
-    os.remove(zip_data)
+    #s3 = boto3.client('s3', 
+    #              aws_access_key_id = aws_access, 
+    #              aws_secret_access_key = aws_secret)
+    #s3.download_file('crystals-gdg', 'raw.zip', 'raw.zip')
+    #zip_ref = ZipFile('raw.zip', 'r')
+    #zip_ref.extractall()
+    #zip_ref.close()
+    #os.remove('raw.zip')
     
     dataset_generator = ImageDataGenerator()
     dataset_generator = dataset_generator.flow_from_directory(
@@ -162,7 +162,7 @@ def save_generated_images(generated_images, epoch, batch_number):
 
 
 # Main train function
-def train_dcgan(batch_size, epochs, image_shape, dataset_path):
+def train_dcgan(aws_access, aws_secret, batch_size, epochs, image_shape, dataset_path):
     # Build the adversarial model that consists in the generator output
     # connected to the discriminator
     generator = construct_generator()
@@ -179,7 +179,7 @@ def train_dcgan(batch_size, epochs, image_shape, dataset_path):
                 metrics=None)
 
     # Create a dataset Generator with help of keras
-    dataset_generator = load_dataset(dataset_path, batch_size, image_shape)
+    dataset_generator = load_dataset(aws_access, aws_secret, dataset_path, batch_size, image_shape)
 
     # 11788 is the total number of images on the bird dataset
     number_of_batches = int(11788 / batch_size)
@@ -291,14 +291,12 @@ def train_dcgan(batch_size, epochs, image_shape, dataset_path):
 def main():
     aws_secret = ''
     aws_access = ''
-    bucket = 'crystals-gdg'
-    zip_data = 'raw.zip'
-    
-    dataset_path = '/home/jupyter/tutorials/generative-crystals/raw'
+  
+    dataset_path = '/home/jupyter/tutorials/generative-crystals/model/raw'
     batch_size = 64
     image_shape = (64, 64, 3)
     epochs = 100
-    train_dcgan(batch_size, epochs,
+    train_dcgan(aws_access, aws_secret, batch_size, epochs,
                 image_shape, dataset_path)
 
 if __name__ == "__main__":
