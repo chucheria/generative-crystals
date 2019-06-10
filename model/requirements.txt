@@ -1,4 +1,4 @@
-tensorflow<2.0.0
+keras
 boto3
 matplotlib
 numpy
