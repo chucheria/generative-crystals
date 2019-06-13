@@ -92,10 +92,10 @@ def construct_generator():
 
     generator = Sequential()
 
-    generator.add(Dense(units=4 * 4 * 512,
+    generator.add(Dense(units=8 * 8 * 512,
                         kernel_initializer='glorot_uniform',
                         input_shape=(1, 1, 100)))
-    generator.add(Reshape(target_shape=(4, 4, 512)))
+    generator.add(Reshape(target_shape=(8, 8, 512)))
     generator.add(BatchNormalization(momentum=0.5))
     generator.add(Activation('relu'))
 
@@ -294,7 +294,7 @@ def main():
   
     dataset_path = '/home/jupyter/tutorials/generative-crystals/model/raw'
     batch_size = 64
-    image_shape = (64, 64, 3)
+    image_shape = (128, 128, 3)
     epochs = 100
     train_dcgan(aws_access, aws_secret, batch_size, epochs,
                 image_shape, dataset_path)
